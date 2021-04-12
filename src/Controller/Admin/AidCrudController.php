@@ -65,7 +65,7 @@ class AidCrudController extends AbstractCrudController
                     'Premier pas' => Aid::TYPE_FIRST_STEP,
                 ]),
             TextField::new('perimeter', 'Périmètre')->hideOnIndex(),
-            TextField::new('region.name', 'Région')->hideOnIndex(),
+            AssociationField::new('regions', 'Régions')->setTemplatePath('admin/aid/environmental_actions.html.twig'),
             TextareaField::new('goal', 'C\'est quoi ?')->hideOnIndex(),
             TextareaField::new('beneficiary', 'Les bénéficiaires')->hideOnIndex(),
             TextareaField::new('aidDetails', 'Accompagnement')->hideOnIndex(),
