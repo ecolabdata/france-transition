@@ -23,6 +23,10 @@ class Aid
     use EntityTimestampable;
     use EntitySoftDeletable;
 
+    public const ORIGIN_BO = 'BO';
+    public const ORIGIN_AT = 'aides-territoires';
+    public const ORIGIN_DMT = 'dematiss';
+
     public const STATE_DRAFT = 'draft';
     public const STATE_PUBLISHED = 'published';
 
@@ -145,6 +149,11 @@ class Aid
      * @ORM\ManyToMany(targetEntity=Region::class, inversedBy="aids")
      */
     private Collection $regions;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private string $origin = self::ORIGIN_BO;
 
     public function __construct()
     {
@@ -467,6 +476,18 @@ class Aid
     public function removeRegion(Region $region): self
     {
         $this->regions->removeElement($region);
+
+        return $this;
+    }
+
+    public function getOrigin(): ?string
+    {
+        return $this->origin;
+    }
+
+    public function setOrigin(string $origin): self
+    {
+        $this->origin = $origin;
 
         return $this;
     }
